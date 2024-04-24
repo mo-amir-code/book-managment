@@ -1,0 +1,28 @@
+{
+  "name": "bookmanagement",
+  "version": "1.0.0",
+  "description": "A book management api's",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon dist/app.js",
+    "start": "node dist/app.js",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mo Amir",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "mongoose": "^8.3.2",
+    "nodemon": "^3.1.0"
+  }
+}
