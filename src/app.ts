@@ -8,7 +8,7 @@ const PORT = 8080
 const app = express();
 
 app.use(express.json())
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
     return res.status(200).json({
         success: true,
         message: "Server is running smoothly"
