@@ -15,6 +15,12 @@ This API provides functionalities for managing book entries, including CRUD oper
 
 ## Author End Points
 
+#### Book Management API Origin
+
+```http
+  https://book-managment-steel.vercel.app/
+```
+
 #### Create Author Account
 
 ```http
