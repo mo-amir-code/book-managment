@@ -16,7 +16,8 @@ export const updateAuthorMW = [
         body('authorId').notEmpty().trim().escape(),
         body('oldName').notEmpty().trim().escape()
     ]),
-    body('name').notEmpty().trim().escape()
+    body('name').optional().notEmpty().trim().escape(),
+    body('email').optional().notEmpty().trim().escape()
 ]
 
 export const deleteAuthorMW = [

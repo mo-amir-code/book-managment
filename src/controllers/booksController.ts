@@ -85,7 +85,7 @@ export const deleteBookByIdAndName = tryCatch(async (req, res, next) => {
         return next(new ErrorHandler("Enter all required fields", 404));
     }
 
-    const {bookId, bookName} = req.query;
+    const {bookId, bookName} = req.body;
 
     const book = await Book.findOneAndDelete({$or: [{ _id: bookId }, { title: bookName?.toString()?.toLowerCase() }]});
 

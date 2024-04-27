@@ -18,8 +18,8 @@ export const fetchAllBooksMW = [
 
 export const deleteBookByMW = [
     oneOf([
-        query('bookId').notEmpty().trim().escape(),
-        query('bookName').notEmpty().trim().escape()
+        body('bookId').notEmpty().trim().escape(),
+        body('bookName').notEmpty().trim().escape()
     ])
 ]
 
