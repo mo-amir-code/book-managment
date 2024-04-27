@@ -1,4 +1,4 @@
-import { body, oneOf, query } from "express-validator";
+import { body, oneOf, param, query } from "express-validator";
 
 export const createBookMW = [
     body('title').notEmpty().trim().escape(),
@@ -21,6 +21,10 @@ export const deleteBookByMW = [
         query('bookId').notEmpty().trim().escape(),
         query('bookName').notEmpty().trim().escape()
     ])
+]
+
+export const getBookByIdMW = [
+        param('bookId').notEmpty().trim().escape()
 ]
 
 export const updateBookMW = [

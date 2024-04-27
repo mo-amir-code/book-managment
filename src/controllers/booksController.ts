@@ -100,6 +100,29 @@ export const deleteBookByIdAndName = tryCatch(async (req, res, next) => {
 
 });
 
+export const getBookById = tryCatch(async (req, res, next) => {
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()){
+        return next(new ErrorHandler("Enter all required fields", 404));
+    }
+
+    const {bookId} = req.params;
+
+    const book = await Book.findById(bookId);
+
+    if(!book){
+        return next(new ErrorHandler("Enter valid book id or name", 404));
+    }
+
+    return res.status(200).json({
+        success: true,
+        message: `${book.title} has been fetched`,
+        data: book
+    })
+
+});
+
 export const updateBook = tryCatch(async (req, res, next) => {
     const errors = validationResult(req);
 
