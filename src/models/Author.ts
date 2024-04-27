@@ -8,7 +8,7 @@ interface AuthorType extends Document{
 }
 
 const authorSchema:Schema<AuthorType> = new Schema({
-    name: {type: String, required:true},
+    name: {type: String, required:true, unique: true},
     email: {type: String, required:true, unique: true},
     password: {type: String, required:true},
     sessionToken: {type: String}

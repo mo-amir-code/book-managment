@@ -15,7 +15,7 @@ exports.createBook = (0, errors_1.tryCatch)(async (req, res, next) => {
         return next(new utility_class_1.default("Enter all required fields", 404));
     }
     const { title, authorName, publicationYear } = req.body;
-    const author = await Author_1.default.findOne({ name: authorName });
+    const author = await Author_1.default.findOne({ name: authorName?.toLowerCase() });
     if (!author) {
         return next(new utility_class_1.default("Author is not found", 404));
     }
@@ -23,12 +23,12 @@ exports.createBook = (0, errors_1.tryCatch)(async (req, res, next) => {
     if (Number.isNaN(parsedPublicationYear)) {
         return next(new utility_class_1.default("Publication year should be a number", 401));
     }
-    const isAlreadyExist = await Book_1.default.findOne({ title });
+    const isAlreadyExist = await Book_1.default.findOne({ title: title.toLowerCase() });
     if (isAlreadyExist) {
         return next(new utility_class_1.default("Book is already registered", 409));
     }
     const bookData = {
-        title,
+        title: title?.toLowerCase(),
         author: author._id,
         publicationYear: parsedPublicationYear
     };
@@ -51,7 +51,7 @@ exports.fetchAllBooks = (0, errors_1.tryCatch)(async (req, res, next) => {
             return next(new utility_class_1.default("Enter valid author id", 404));
     }
     else if (authorName) {
-        const author = await Author_1.default.findOne({ name: authorName });
+        const author = await Author_1.default.findOne({ name: authorName?.toLowerCase() });
         newAuthorId = author._id;
     }
     if (!newAuthorId && !publicationYear)
@@ -66,13 +66,12 @@ exports.fetchAllBooks = (0, errors_1.tryCatch)(async (req, res, next) => {
 exports.deleteBookByIdAndName = (0, errors_1.tryCatch)(async (req, res, next) => {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
-        return next(new utility_class_1.default("Enter all required field", 404));
+        return next(new utility_class_1.default("Enter all required fields", 404));
     }
     const { bookId, bookName } = req.query;
-    console.log(bookName);
-    const book = await Book_1.default.findOneAndDelete({ $or: [{ _id: bookId }, { title: bookName }] });
+    const book = await Book_1.default.findOneAndDelete({ $or: [{ _id: bookId }, { title: bookName?.toString()?.toLowerCase() }] });
     if (!book) {
-        return next(new utility_class_1.default("Enter valid book id", 404));
+        return next(new utility_class_1.default("Enter valid book id or name", 404));
     }
     return res.status(200).json({
         success: true,
@@ -86,7 +85,7 @@ exports.updateBook = (0, errors_1.tryCatch)(async (req, res, next) => {
     }
     const { bookId, title, publicationYear } = req.body;
     const updatingData = {
-        title,
+        title: title?.toLowerCase(),
         publicationYear
     };
     const book = await Book_1.default.findByIdAndUpdate(bookId, updatingData);

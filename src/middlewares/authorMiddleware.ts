@@ -6,6 +6,11 @@ export const createAuthorMW = [
     body('password').notEmpty().trim().escape()
  ]
 
+export const loginAuthorMW = [
+    body('email').notEmpty().trim().escape(),
+    body('password').notEmpty().trim().escape()
+ ]
+
 export const updateAuthorMW = [
     oneOf([
         body('authorId').notEmpty().trim().escape(),

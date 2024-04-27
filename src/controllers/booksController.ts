@@ -13,7 +13,7 @@ export const createBook = tryCatch(async (req, res, next)  => {
 
     const { title, authorName, publicationYear } = req.body;
 
-    const author = await Author.findOne({name: authorName});
+    const author = await Author.findOne({name: authorName?.toLowerCase()});
 
     if(!author){  
         return next(new ErrorHandler("Author is not found", 404));
@@ -26,7 +26,7 @@ export const createBook = tryCatch(async (req, res, next)  => {
     }
 
 
-    const isAlreadyExist = await Book.findOne({title});
+    const isAlreadyExist = await Book.findOne({title: title.toLowerCase()});
 
     if(isAlreadyExist){
         return next(new ErrorHandler("Book is already registered", 409));
@@ -34,7 +34,7 @@ export const createBook = tryCatch(async (req, res, next)  => {
 
 
     const bookData = {
-        title,
+        title: title?.toLowerCase(),
         author: author._id,
         publicationYear: parsedPublicationYear
     }
@@ -62,7 +62,7 @@ export const fetchAllBooks = tryCatch(async (req, res, next) => {
         const author = await Author.findById(newAuthorId);
         if(!author) return next(new ErrorHandler("Enter valid author id", 404))
     }else if(authorName){
-        const author = await Author.findOne({name: authorName});
+        const author = await Author.findOne({name: authorName?.toLowerCase()});
         newAuthorId = author._id;
     }
 
@@ -82,16 +82,15 @@ export const deleteBookByIdAndName = tryCatch(async (req, res, next) => {
     const errors = validationResult(req)
 
     if(!errors.isEmpty()){
-        return next(new ErrorHandler("Enter all required field", 404));
+        return next(new ErrorHandler("Enter all required fields", 404));
     }
 
     const {bookId, bookName} = req.query;
-    console.log(bookName)
 
-    const book = await Book.findOneAndDelete({$or: [{ _id: bookId }, { title: bookName }]});
+    const book = await Book.findOneAndDelete({$or: [{ _id: bookId }, { title: bookName?.toString()?.toLowerCase() }]});
 
     if(!book){
-        return next(new ErrorHandler("Enter valid book id", 404));
+        return next(new ErrorHandler("Enter valid book id or name", 404));
     }
 
     return res.status(200).json({
@@ -111,7 +110,7 @@ export const updateBook = tryCatch(async (req, res, next) => {
     const {bookId, title, publicationYear} = req.body;
 
     const updatingData = {
-        title,
+        title: title?.toLowerCase(),
         publicationYear
     }
 

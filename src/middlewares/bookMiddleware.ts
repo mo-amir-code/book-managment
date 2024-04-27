@@ -1,4 +1,4 @@
-import { body, oneOf, param, query } from "express-validator";
+import { body, oneOf, query } from "express-validator";
 
 export const createBookMW = [
     body('title').notEmpty().trim().escape(),

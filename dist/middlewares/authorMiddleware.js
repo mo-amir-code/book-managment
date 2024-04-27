@@ -1,9 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteAuthorMW = exports.updateAuthorMW = exports.createAuthorMW = void 0;
+exports.deleteAuthorMW = exports.updateAuthorMW = exports.loginAuthorMW = exports.createAuthorMW = void 0;
 const express_validator_1 = require("express-validator");
 exports.createAuthorMW = [
     (0, express_validator_1.body)('name').notEmpty().trim().escape(),
+    (0, express_validator_1.body)('email').notEmpty().trim().escape(),
+    (0, express_validator_1.body)('password').notEmpty().trim().escape()
+];
+exports.loginAuthorMW = [
     (0, express_validator_1.body)('email').notEmpty().trim().escape(),
     (0, express_validator_1.body)('password').notEmpty().trim().escape()
 ];

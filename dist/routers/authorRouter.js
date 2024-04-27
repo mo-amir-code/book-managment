@@ -8,7 +8,8 @@ const authorController_1 = require("../controllers/authorController");
 const authorMiddleware_1 = require("../middlewares/authorMiddleware");
 const router = express_1.default.Router();
 router
-    .post("/", authorMiddleware_1.createAuthorMW, authorController_1.createAuthor)
+    .post("/signup", authorMiddleware_1.createAuthorMW, authorController_1.createAuthor)
+    .post("/signin", authorMiddleware_1.loginAuthorMW, authorController_1.loginAuthor)
     .patch("/", authorMiddleware_1.updateAuthorMW, authorController_1.updateAuthor)
     .delete("/", authorMiddleware_1.deleteAuthorMW, authorController_1.deleteAuthor)
     .get("/", authorController_1.fetchAuthors);
