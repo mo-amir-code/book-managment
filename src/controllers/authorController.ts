@@ -29,7 +29,7 @@ export const createAuthor = tryCatch(async (req, res, next) => {
 
     const newAuthorData = {
         name: name.toLowerCase(),
-        email,
+        email: email.toLowerCase(),
         password: hashedPassword
     }
 
@@ -56,7 +56,7 @@ export const loginAuthor = tryCatch(async (req, res, next) => {
 
     const {email, password} = req.body;
 
-    const author = await Author.findOne({email});
+    const author = await Author.findOne({email:email?.toLowerCase()});
 
     if(!author){
         return next(new ErrorHandler("Author is not found", 404));
@@ -91,10 +91,10 @@ export const updateAuthor = tryCatch(async (req, res, next) => {
 
     const updatingData = {
         name: name?.toLowerCase() || undefined,
-        email: email || undefined
+        email: email?.toLowerCase() || undefined
     }
 
-    const author = await Author.findOneAndUpdate({ $or:[{ _id: authorId }, { name: oldName }] }, updatingData);
+    const author = await Author.findOneAndUpdate({ $or:[{ _id: authorId }, { name: oldName.toLowerCase() }] }, updatingData);
 
     if(!author){
         return next(new ErrorHandler("Enter valid author id or old name", 404))
