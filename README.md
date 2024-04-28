@@ -62,7 +62,7 @@ This API provides functionalities for managing book entries, including CRUD oper
   DELETE /api/v1/author
 ```
 
-| Query Parameter | Type     | Description                       |
+| Body Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `authorId/name`      | `string` | **Required** |
 

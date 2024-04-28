@@ -113,7 +113,7 @@ export const deleteAuthor = tryCatch(async (req, res, next) => {
         return next(new ErrorHandler("Enter all required fields", 404))
     }
 
-    const {authorId, name} = req.query;
+    const {authorId, name} = req.body;
 
     const author = await Author.findOneAndDelete({$or: [{_id: authorId}, { name:name?.toString().toLowerCase() }]});
 

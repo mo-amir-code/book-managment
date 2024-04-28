@@ -22,7 +22,7 @@ export const updateAuthorMW = [
 
 export const deleteAuthorMW = [
     oneOf([
-        query('authorId').notEmpty().trim().escape(),
-        query('name').notEmpty().trim().escape()
+        body('authorId').notEmpty().trim().escape(),
+        body('name').notEmpty().trim().escape()
     ])
 ]
