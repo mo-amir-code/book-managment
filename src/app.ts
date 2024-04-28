@@ -18,7 +18,7 @@ app.use("/api/v1", routers)
 app.use(errorHandler)
 
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+    await connectToDB(); 
     console.log(`Server started at port ${PORT}`)
-    connectToDB(); 
-})
+});
