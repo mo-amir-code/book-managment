@@ -68,7 +68,7 @@ export const fetchAllBooks = tryCatch(async (req, res, next) => {
 
     if(!newAuthorId && !publicationYear) return next(new ErrorHandler("Enter required field(s)", 404));
 
-    const books = await Book.find({$or: [{ author: newAuthorId }, { publicationYear: publicationYear }]});
+    const books = await Book.find({$or: [{ author: newAuthorId }, { publicationYear: {$gte: publicationYear} }]});
 
     return res.status(200).json({
         success: true,
