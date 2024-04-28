@@ -11,9 +11,9 @@ export const createBook = tryCatch(async (req, res, next)  => {
         return next(new ErrorHandler("Enter all required fields", 404));
     }
 
-    const { title, authorName, publicationYear } = req.body;
+    const { title, authorName, authorId, publicationYear } = req.body;
 
-    const author = await Author.findOne({name: authorName?.toLowerCase()});
+    const author = await Author.findOne({$or: [{_id: authorId}, {name: authorName?.toLowerCase()}]});
 
     if(!author){  
         return next(new ErrorHandler("Author is not found", 404));

@@ -2,7 +2,10 @@ import { body, oneOf, param, query } from "express-validator";
 
 export const createBookMW = [
     body('title').notEmpty().trim().escape(),
-    body('authorName').notEmpty().trim().escape(),
+    oneOf([
+        body('authorName').notEmpty().trim().escape(),
+        body('authorId').notEmpty().trim().escape()
+    ]),
     body('publicationYear').notEmpty().trim().escape(),
 ]
 

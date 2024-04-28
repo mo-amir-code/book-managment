@@ -83,7 +83,7 @@ This API provides functionalities for managing book entries, including CRUD oper
 | Body Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `title` | `string` | **Required** |
-| `authorName` | `string` | **Required** |
+| `authorName/authorId` | `string` | **Required** |
 | `publicationYear` | `string` | **Required** |
 
 #### Get All Books By Author Id or Author Name or Publication Year
