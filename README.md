@@ -112,7 +112,7 @@ This API provides functionalities for managing book entries, including CRUD oper
   DELETE /api/v1/book
 ```
 
-| Query Parameter | Type     | Description                |
+| Body Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `bookId/bookName` | `string` | **Required** |
 
